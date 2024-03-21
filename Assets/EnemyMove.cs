@@ -8,7 +8,7 @@ public class EnemyMove : MonoBehaviour
 	public float	waitSecond = 10.0f;
 
 	Transform		tr;
-
+	int				hitCounter = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,8 +24,10 @@ public class EnemyMove : MonoBehaviour
 
 	void		OnTriggerEnter2D(Collider2D Collision)
 	{
-		Destroy(this.gameObject);
+		hitCounter++;
 		Destroy(Collision.gameObject);
+		if (hitCounter > 1)
+			Destroy(this.gameObject);
 	}
 
 	IEnumerator DestroySelf()
