@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerMove : MonoBehaviour
 
 	Transform			tr;
 	Vector2				mousePosition;
+	int					hitCounter = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -61,5 +63,13 @@ public class PlayerMove : MonoBehaviour
 
 			yield return (new WaitForSeconds(0.3f));
 		}
+	}
+
+	void	OnTriggerEnter2D(Collider2D collision)
+	{
+		// hitCounter++;
+		// Destroy(collision.gameObject);
+		// if (hitCounter > 4)
+		SceneManager.LoadScene("GameOver");
 	}
 }

@@ -22,10 +22,10 @@ public class EnemyMove : MonoBehaviour
         tr.Translate(Vector2.down * speed);
     }
 
-	void		OnTriggerEnter2D(Collider2D Collision)
+	void		OnTriggerEnter2D(Collider2D collision)
 	{
 		hitCounter++;
-		Destroy(Collision.gameObject);
+		Destroy(collision.gameObject);
 		if (hitCounter > 1)
 		{
 			Destroy(this.gameObject);
