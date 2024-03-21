@@ -27,7 +27,10 @@ public class EnemyMove : MonoBehaviour
 		hitCounter++;
 		Destroy(Collision.gameObject);
 		if (hitCounter > 1)
+		{
 			Destroy(this.gameObject);
+			GameObject.Find("GameManager").GetComponent<Score>().score += 10;
+		}
 	}
 
 	IEnumerator DestroySelf()
