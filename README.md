@@ -45,6 +45,9 @@
 - Hierarchy View에서 Player 게임 오브젝트를 만든다.
   - Square로 만들면 스프라이트 렌더러가 포함돼 편하다!
   - Sprite를 Plane으로 설정한다.
+- Circle Collider 2D를 component에 추가해 Radius를 비행기 크기에 맞게 조정한다.
+  - Poligon Collider 2D가 더 정확하나 로딩이 오래 걸린다. 간단한 실습이니 Circle로 하자...
+  - Is Trigger를 체크해 `OnTriggerEnter2D()`함수를 사용할 수 있게 한다.
 - C\# 스크립트 이름을 [PlayerMove](./Assets/PlayerMove.cs)로 만든다.
   - 이하 요소들을 선언한다.\
     `public float  speed;`\
@@ -72,5 +75,22 @@
     - `yield return new WaitForSeconds(0.3f);`로 0.3f마다 반복한다.
   - `void	OnTriggerEnter2D(Collider2D collision)` 함수에서 충돌이 일어날 때 GameOver Scenen으로 넘긴다.
 - PlayerMove를 component에 추가한다.
-- Circle Collider 2D를 component에 추가해 Radius를 비행기 크기에 맞게 조정한다.
-  - Poligon Collider 2D가 더 정확하나 로딩이 오래 걸린다. 간단한 실습이니 Circle로 하자...
+
+### 3. 총알(Bullet) 설정
+
+- Bullet 게임 오브젝트를 만든다.
+  - Sprite를 bullet으로 설정한다.
+- Position이 (0, 0, 0)이 아닐 경우 Transform 바 우측 설정(세로 점 세 개)을 눌러 Reset을 클릭한다.
+- Box Collider 2D를 component에 추가한다.
+- C\# 스크립트 이름을 [BulletMove](./Assets/BulletMove.cs)로 만든다.
+  - 이하 요소들을 선언한다.\
+    `public float	speed;`\
+    `public float	waitSecond;`\
+    `Transform		tr;`
+    - `waitSecond`는 bullet이 없어질 시간이다.
+  - 이하 함수를 추가한다.\
+    `IEnumerator DestroySelf()`
+  - `Start()`에서 `StartCoroutine(DestroySelf());`으로 `waitSecond` 시간 후 bullet이 파괴되도록 한다.
+  - `Update()`에서 `tr.Translate(Vector2.up * speed);`으로 bullet의 높이를 매 프레임 speed만큼 높인다.
+  - `IEnumerator DestroySelf()`에서 `yield return new WaitForSeconds(waitSecond);, Destroy(this.gameObject);`로 waitSecond마다 bullet이 파괴도록 한다.
+- BulletMove를 component에 추가한다.
