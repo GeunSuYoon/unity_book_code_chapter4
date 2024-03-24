@@ -24,7 +24,7 @@ public class BulletMove : MonoBehaviour
 
 	IEnumerator DestroySelf()
 	{
-		yield return (new WaitForSeconds(waitSecond));
+		yield return new WaitForSeconds(waitSecond);
 		Destroy(this.gameObject);
 	}
 }

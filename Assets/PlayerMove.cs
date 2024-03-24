@@ -54,7 +54,6 @@ public class PlayerMove : MonoBehaviour
 		Gizmos.DrawLine(new Vector2(limitPoint2.x, limitPoint1.y), limitPoint2);
 	}
 
-
 	IEnumerator FireBullet()
 	{
 		while (true)
