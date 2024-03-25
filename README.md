@@ -94,3 +94,29 @@
   - `Update()`에서 `tr.Translate(Vector2.up * speed);`으로 bullet의 높이를 매 프레임 speed만큼 높인다.
   - `IEnumerator DestroySelf()`에서 `yield return new WaitForSeconds(waitSecond);, Destroy(this.gameObject);`로 waitSecond마다 bullet이 파괴도록 한다.
 - BulletMove를 component에 추가한다.
+- Bullet 게임 오브젝트를 Project View로 드래그해 Prefab으로 만든다.
+  - 파란 상자 아이콘으로 바뀌면 성공한 것이다.
+
+### 4. 적 비행기(Enemy) 설정
+
+- Enemy 게임 오브젝트를 만든다.
+  - Sprite를 Plane_Enemy로 설정한다.
+- Circle Collider 2D를 component에 추가해 충돌 범위를 적절히 설정한다.
+- Rigidbody 2D를 component에 추가하고, Gravity Scale을 0으로 바꿔 중력 현상을 안 받도록 한다.
+- C\# 스크립트 이름을 [EnemyMove](./Assets/EnemyMove.cs)로 만든다.
+  - Enemy는 Bullet과 비슷한 움직임을 보인다.
+  - BulletMove Script를 복사해 EnemyMove Script로 만들자.
+  - `int  hitCounter = 0;` 변수를 추가하자.
+    - 개인적으로 추가해본 부분이다.
+    - hitCounter는 collision이 일어날 때 증가하며, 특정 값이 되면 게임 오브젝트를 파괴한다.
+  - speed와 waitSecond 값을 적절히 바꾼다.
+  - `void		OnTriggerEnter2D(Collider2D collision);` 함수를 추가로 사용한다.
+    - PlayerMove 스크립트 내 이름이 같은 함수와 비슷한 역할을 한다.
+    - hitCounter를 증가시키고, 충돌한 오브젝트를 삭제한다.
+    - 만일 hitCounter가 일정 수 이상이 되면, Enemy 오브젝트를 Destroy 한다.
+    - Destroy 후 GameManger 오브젝트의 Score를 10 올린다.
+- EnemyMove를 component에 추가한다.
+- Enemy 게임 오브젝트를 Project View로 드래그해 Prefab으로 만든다!
+
+### 5. 스코어 표시하기
+### 6. 게임오버 화면 만들기(Scene 전환)
